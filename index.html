@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Rápido | Gestión de flotas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="auth">
+  <aside>
+    <div class="brand">EL RÁPIDO<b>↗</b></div>
+    <div class="subtitle">GESTIÓN DE FLOTAS</div>
+
+    <div class="navlabel">ESPACIO DE TRABAJO</div>
+    <nav id="nav" aria-label="Navegación principal"></nav>
+
+    <div class="sidefoot">
+      <button class="link logout" onclick="logout()">
+        ↪ Cerrar sesión
+      </button>
+
+      <p>● Sistema de demostración</p>
+      <p>Nivex Developers Inc.<br>Versión de diseño · 2026</p>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <div class="breadcrumb">
+        Transportes El Rápido
+        <span>/</span>
+        <b id="crumb">Resumen general</b>
+      </div>
+
+      <div class="headright">
+        <button
+          class="link notification"
+          onclick="go('Alertas')"
+          aria-label="Ver alertas"
+        >
+          ♧ <span class="badge warn" id="alertCount">0</span>
+        </button>
+
+        <details class="account-menu" id="accountMenu">
+          <summary aria-label="Abrir menú de cuenta">
+            <span class="avatar" id="avatar">GM</span>
+
+            <span class="account-info">
+              Cuenta de prueba
+              <strong id="rolename">Gerencia</strong>
+            </span>
+
+            <span aria-hidden="true">▾</span>
+          </summary>
+
+          <div class="account-dropdown">
+            <p>Mi cuenta</p>
+
+            <button type="button" onclick="logout()">
+              ↪ Cerrar sesión
+            </button>
+          </div>
+        </details>
+      </div>
+    </header>
+
+    <div class="content" id="app"></div>
+  </main>
+
+  <div id="authroot"></div>
+
+  <dialog id="modal" aria-labelledby="modalTitle"></dialog>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
