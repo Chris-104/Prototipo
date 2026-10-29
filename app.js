@@ -6,6 +6,12 @@
 
 const availableRoles = ["Gerencia", "Mecánico", "Chofer"];
 
+const demoLogins = {
+  "gerencia@gmail.com": "Gerencia",
+  "mecanico@gmail.com": "Mecánico",
+  "chofer@gmail.com": "Chofer"
+};
+
 const authPages = [
   "Acceso",
   "Recuperar acceso",
@@ -391,33 +397,21 @@ function go(destination) {
   render();
 }
 
-function chooseProfile(selectedRole) {
-  if (
-    sessionActive ||
-    page !== "Acceso" ||
-    !availableRoles.includes(selectedRole)
-  ) {
-    return;
-  }
-
-  authProfile = selectedRole;
-
-  document.querySelectorAll("[data-profile]").forEach(button => {
-    const selected = button.dataset.profile === selectedRole;
-    button.classList.toggle("chosen", selected);
-    button.setAttribute("aria-pressed", String(selected));
-  });
-
-  document.getElementById("loginButton").textContent =
-    "Iniciar sesión como " + selectedRole.toLowerCase() + " →";
-}
-
 function login() {
   if (sessionActive || page !== "Acceso") {
     return;
   }
 
   if (!document.getElementById("loginForm").reportValidity()) {
+    return;
+  }
+
+  const email = document.getElementById("authemail").value.trim().toLowerCase();
+
+  if (demoLogins[email]) {
+    authProfile = demoLogins[email];
+  } else {
+    toast("No existe una cuenta de demostración con ese correo.");
     return;
   }
 
@@ -1894,24 +1888,6 @@ function renderAuth() {
         tu operación en movimiento.
       </p>
 
-      <div
-        class="profilechips"
-        role="group"
-        aria-label="Seleccionar perfil de demostración"
-      >
-        ${availableRoles.map(item => `
-          <button
-            type="button"
-            data-profile="${item}"
-            class="${authProfile === item ? "chosen" : ""}"
-            aria-pressed="${authProfile === item}"
-            onclick="chooseProfile('${item}')"
-          >
-            ${item}
-          </button>
-        `).join("")}
-      </div>
-
       <form id="loginForm" onsubmit="event.preventDefault(); login()">
         <label for="authemail">Correo electrónico</label>
         <input
@@ -1955,13 +1931,14 @@ function renderAuth() {
         </div>
 
         <button type="submit" class="btn" id="loginButton">
-          Iniciar sesión como ${authProfile.toLowerCase()} →
+          Iniciar sesión →
         </button>
       </form>
 
       <div class="notice">
-        Prototipo: utiliza un correo ficticio y una contraseña
-        de prueba de al menos 4 caracteres.
+        Prototipo: usa un correo de demostración
+        (gerencia@gmail.com, mecanico@gmail.com o chofer@gmail.com)
+        y una contraseña de prueba de al menos 4 caracteres.
         No se validan cuentas reales.
       </div>
 

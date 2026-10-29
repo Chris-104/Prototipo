@@ -887,29 +887,6 @@ body:not(.auth) #authroot {
   margin-top: 24px;
 }
 
-.profilechips {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 6px;
-  margin: 22px 0;
-}
-
-.profilechips button {
-  border: 1px solid #e0e6ea;
-  border-radius: 6px;
-  background: white;
-  padding: 12px 3px;
-  font-size: 11px;
-  color: #758393;
-}
-
-.profilechips .chosen {
-  border-color: var(--green);
-  background: #edf6f2;
-  color: var(--green);
-  font-weight: 700;
-}
-
 .authnote {
   font-size: 11px;
   text-align: center;
